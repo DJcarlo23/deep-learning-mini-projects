@@ -11,7 +11,7 @@ class Model():
                  include_top=False,
                  input_shape=(150, 150, 3))
         
-        self.main_model = keras.models.load_model(Path('Cats-vs-dogs/cats_and_dogs_model.h5'))
+        self.main_model = keras.models.load_model(Path('cats_and_dogs_model.h5'))
 
     def load_data(self, image_path):
         image = load_img(image_path, target_size=(150, 150))

@@ -8,9 +8,9 @@ from model import Model
 def main_win():
     layout = []
 
-    layout += [[sg.Image(key='-IMAGE-')]]
+    layout += [[sg.Column([[sg.Image(key='-IMAGE-')]], justification='center')]]
     layout += [[sg.Text("Choose a file: "), sg.Input(), sg.FileBrowse(key='-IN-')]]
-    layout += [[sg.Button('Load Image')]]
+    layout += [[sg.Button('Load Image'), sg.Text('', key='-TEXT-')]]
     
 
     return sg.Window('Main window', layout, finalize=True)
@@ -36,8 +36,10 @@ while True:
 
             proba = classification_model.classify_image(filename)
 
-            print(f'Dog: {int((proba[0][0])*100)}%')
-            print(f'Cat: {int((1-proba[0][0])*100)}%')
+            proba_proc_dog = int((proba[0][0])*100)
+            proba_proc_cat = int((1-proba[0][0])*100)
+
+            main_window['-TEXT-'].update(f'Dog: {proba_proc_dog}% Cat: {proba_proc_cat}%')
 
 
 
